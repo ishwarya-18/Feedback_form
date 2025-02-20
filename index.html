@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Register Now</h2>
+        <form id="registrationForm">
+            <label>Full Name:</label>
+            <input type="text" id="name" required>
+
+            <label>Username:</label>
+            <input type="text" id="username" required>
+
+            <label>Email:</label>
+            <input type="email" id="email" required>
+
+            <label>Phone Number:</label>
+            <input type="tel" id="phone" required>
+
+            <label>Password:</label>
+            <input type="password" id="password" required>
+
+            <label>Date of Birth:</label>
+            <input type="date" id="dob" required>
+
+            <label>Profile Picture:</label>
+            <input type="file" id="profilePicture" accept="image/*">
+
+            <label>Preferred Communication Method:</label>
+            <select id="communicationMethod" required>
+                <option value="">Select</option>
+                <option value="Email">Email</option>
+                <option value="Phone">Phone</option>
+                <option value="WhatsApp">WhatsApp</option>
+            </select>
+
+            <label>User Role:</label>
+            <select id="role" required>
+                <option value="">Select Role</option>
+                <option value="Admin">Admin</option>
+                <option value="Student">Student</option>
+                <option value="Mentor">Mentor</option>
+            </select>
+
+            <label>Referral Code (Optional):</label>
+            <input type="text" id="referralCode">
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="terms" required>
+                <label for="terms">I accept the terms & conditions</label>
+            </div>
+
+            <p id="error-message" class="error-message"></p>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+
+            const name = document.getElementById("name").value.trim();
+            const username = document.getElementById("username").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const dob = document.getElementById("dob").value;
+            const profilePicture = document.getElementById("profilePicture").files[0];
+            const communicationMethod = document.getElementById("communicationMethod").value;
+            const role = document.getElementById("role").value;
+            const referralCode = document.getElementById("referralCode").value;
+            const terms = document.getElementById("terms").checked;
+            const errorMessage = document.getElementById("error-message");
+
+            if (!name || !username || !email || !phone || !password || !dob || !communicationMethod || !role || !terms) {
+                errorMessage.innerText = "All required fields must be filled!";
+                errorMessage.style.display = "block";
+                return;
+            }
+
+            errorMessage.style.display = "none";
+
+            const formData = new FormData();
+            formData.append("name", name);
+            formData.append("username", username);
+            formData.append("email", email);
+            formData.append("phone", phone);
+            formData.append("password", password);
+            formData.append("dob", dob);
+            formData.append("profilePicture", profilePicture);
+            formData.append("communicationMethod", communicationMethod);
+            formData.append("role", role);
+            formData.append("referralCode", referralCode);
+            formData.append("terms", terms);
+
+            fetch('/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message))
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+
+</body>
+</html>
