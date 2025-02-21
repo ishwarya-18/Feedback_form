@@ -1,7 +1,5 @@
 # 📌 Feedback Form
 
-![2025-02-21 (12)](https://github.com/user-attachments/assets/3c4998fc-5052-479b-baf0-fe0531889897)
-
 A stylish and user-friendly feedback form that allows users to submit their feedback, rate their experience, and subscribe to a newsletter. 🌟
 
 ---
