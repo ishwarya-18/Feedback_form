@@ -1,62 +1,59 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const multer = require('multer');
-const path = require('path');
-const { Pool } = require('pg');
+require("dotenv").config();
+const express = require("express");
+const { body, validationResult } = require("express-validator");
+const bodyParser = require("body-parser");
+const path = require("path");
+const { Pool } = require("pg");
 
 const app = express();
-app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname)));
-
-// Multer for file uploads
-const storage = multer.diskStorage({
-    destination: './uploads/',
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
-const upload = multer({ storage: storage });
+const PORT = 3000;
 
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'user_registration',
-    password: '2005',
-    port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
 });
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Serve Feedback Form
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-app.post('/submit', upload.single('profilePicture'), async (req, res) => {
-    const { name, username, email, phone, password, dob, communicationMethod, role, referralCode, terms } = req.body;
-    const profilePicture = req.file ? req.file.filename : null;
-
-    if (!name || !username || !email || !phone || !password || !dob || !communicationMethod || !role || !terms) {
-        return res.status(400).json({ success: false, message: 'All required fields must be filled!' });
+// Handle Form Submission
+app.post(
+  "/submit",
+  [
+    body("name").notEmpty().withMessage("Name is required"),
+    body("email").isEmail().withMessage("Valid email required"),
+    body("rating").isInt({ min: 1, max: 5 }).withMessage("Rating must be between 1 and 5"),
+    body("comments").notEmpty().withMessage("Comments are required"),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.json({ success: false, errors: errors.array() });
     }
+
+    const { name, email, rating, comments } = req.body;
 
     try {
-        const existingUser = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
-
-        if (existingUser.rows.length > 0) {
-            return res.status(400).json({ success: false, message: 'User already exists in database' });
-        }
-
-        await pool.query(
-            "INSERT INTO users (name, username, email, phone, password, dob, profile_picture, communication_method, role, referral_code, terms) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",
-            [name, username, email, phone, password, dob, profilePicture, communicationMethod, role, referralCode, terms]
-        );
-
-        res.json({ success: true, message: 'User registered successfully' });
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: 'Internal server error' });
+      const result = await pool.query(
+        "INSERT INTO feedback (name, email, rating, comments) VALUES ($1, $2, $3, $4) RETURNING *",
+        [name, email, rating, comments]
+      );
+      res.json({ success: true, message: "Feedback submitted successfully!" });
+    } catch (err) {
+      console.error(err);
+      res.json({ success: false, message: "Error storing feedback" });
     }
-});
+  }
+);
 
-app.listen(3000, () => {
-    console.log('Server running on http://localhost:3000');
-});
+// Start Server
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

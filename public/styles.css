@@ -1,0 +1,196 @@
+/* Global Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Background Styling */
+body {
+    background: linear-gradient(135deg, #f8f9fa, #e3e6e8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Glassmorphism Container */
+.container {
+    width: 400px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Header Styling */
+h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.subtext {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 15px;
+}
+
+/* Labels */
+label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    display: block;
+    margin-top: 10px;
+}
+
+/* Input Fields */
+input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    color: #333;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Select Dropdown */
+select {
+    appearance: none;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="gray"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>') no-repeat right 10px center;
+    background-size: 15px;
+    cursor: pointer;
+}
+
+/* Input Focus */
+input:focus, textarea:focus, select:focus {
+    border-color: #ff416c;
+    box-shadow: 0 0 8px rgba(255, 65, 108, 0.6);
+    outline: none;
+}
+
+/* Rating Section */
+.rating-container {
+    display: flex;
+    flex-direction: row-reverse; /* Reversing order */
+    justify-content: left; /* Left to right selection */
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.rating-container input {
+    display: none;
+}
+
+.rating-container label {
+    font-size: 26px;
+    color: #bbb;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+/* Star Hover & Selection */
+.rating-container label:hover,
+.rating-container label:hover ~ label,
+.rating-container input:checked ~ label {
+    color: #f4c542;
+}
+/* Checkbox Container */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Adjust spacing between checkbox and text */
+    margin-top: -15px;
+}
+
+/* Checkbox Styling */
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* Submit Button */
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Button Hover */
+button:hover {
+    background: linear-gradient(135deg, #ff4b2b, #ff416c);
+    box-shadow: 0px 0px 12px rgba(255, 75, 43, 0.6);
+}
+
+/* Button Loading Spinner */
+button.loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+button .loading-spinner {
+    display: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid white;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+button.loading .loading-spinner {
+    display: inline-block;
+}
+
+/* Keyframes for Button Spinner */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Feedback List */
+#feedbackList {
+    margin-top: 15px;
+    text-align: left;
+}
+
+.feedback-box {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    color: #333;
+    font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .container {
+        width: 100%;
+        padding: 20px;
+    }
+}

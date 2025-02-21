@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish Feedback Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Share Your Feedback</h2>
+        <p class="subtext">We value your opinion. Let us know what you think!</p>
+
+        <form id="feedbackForm">
+            <!-- Name Input -->
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+
+            <!-- Email Input -->
+            <label for="email">Your Email</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+
+            <!-- Phone Number Input -->
+            <label for="phone">Your Phone (Optional)</label>
+            <input type="tel" id="phone" placeholder="Enter your phone number">
+
+            <!-- Category Selection -->
+            <label for="category">Feedback Category</label>
+            <select id="category" required>
+                <option value="">Select a category</option>
+                <option value="Website">Website</option>
+                <option value="Service">Service</option>
+                <option value="Product">Product</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <!-- Feedback Input -->
+            <label for="feedback">Your Feedback</label>
+            <textarea id="feedback" placeholder="Write your thoughts..." rows="4" required></textarea>
+
+            <!-- Rating Section -->
+            <label>Rate Your Experience</label>
+            <div class="rating-container">
+                <input type="radio" id="star5" name="rating" value="5">
+                <label for="star5">&#9733;</label>
+                <input type="radio" id="star4" name="rating" value="4">
+                <label for="star4">&#9733;</label>
+                <input type="radio" id="star3" name="rating" value="3">
+                <label for="star3">&#9733;</label>
+                <input type="radio" id="star2" name="rating" value="2">
+                <label for="star2">&#9733;</label>
+                <input type="radio" id="star1" name="rating" value="1">
+                <label for="star1">&#9733;</label>
+            </div>
+
+            <!-- Newsletter Subscription Checkbox -->
+            <div class="checkbox-group">
+                <input type="checkbox" id="subscribe">
+                <label for="subscribe">Subscribe to our newsletter</label>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" id="submitBtn">
+                Submit Feedback
+                <span class="loading-spinner"></span>
+            </button>
+        </form>
+
+        <!-- Feedback List -->
+        <div id="feedbackList"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
