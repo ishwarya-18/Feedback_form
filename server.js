@@ -16,13 +16,13 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 });
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname)));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Serve Feedback Form
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 // Handle Form Submission
