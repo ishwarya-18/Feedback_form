@@ -1,42 +1,44 @@
-**# 📝 Stylish Feedback Form**
+# 📢 Feedback Form API
 
-## 📦 Project Overview
-The **Stylish Feedback Form** is a user-friendly, responsive web form designed to collect valuable feedback from users. It features a clean design, star rating system, and an optional newsletter subscription.
+A simple feedback form with a Node.js backend and Express.js to handle feedback submissions. 🚀
 
-## 🌐 Live Demo
-https://feedbackform-va7h.onrender.com
+## 📌 Features
+- 🌐 Collect user feedback
+- ⭐ Star rating system
+- 📧 Email & phone number support
+- 📩 Optional newsletter subscription
+- 🔒 CORS enabled
 
-## 🔧 Features
-- ✨ **Modern and Responsive Design**
-- 📨 **Collects User Feedback** (Name, Email, Phone, and Comments)
-- 🌟 **Star Rating System** for experience rating
-- 📃 **Dropdown for Feedback Category**
-- ✅ **Newsletter Subscription Option**
-- 🛠️ **Form Validation for Required Fields**
-- 📈 **Dynamic Feedback List (Future Enhancement)**
+## 🛠 Tech Stack
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** Node.js, Express.js
+- **Database:** (To be integrated if needed)
+- **Middleware:** Cors, Body-Parser, Dotenv
 
-## 💻 Tech Stack
-- **HTML5** – Structure
-- **CSS3** – Styling
-- **JavaScript** – Interactivity
+## 🚀 Getting Started
 
-## 📝 Usage
-1. Clone the repository:
+### 🔧 Setup & Installation
+1. **Clone the repository**
    ```sh
-   git clone [https://github.com/yourusername/feedback-form.git](https://github.com/ishwarya-18/Feedback_form)
+   git clone https://github.com/your-repo/feedback-form.git
    ```
-2. Navigate to the project folder:
+2. **Install dependencies**
    ```sh
-   cd feedback-form
+   npm install
    ```
-3. Open `index.html` in your browser.
+3. **Run the server**
+   ```sh
+   node server.js
+   ```
+4. **Access the API**
+   Open [http://localhost:5000](http://localhost:5000) in your browser.
 
-## 💪 Contribution
-Feel free to contribute by creating a pull request. Suggestions and improvements are always welcome!
+## 🎯 API Routes
+| Method | Endpoint  | Description |
+|--------|----------|-------------|
+| GET    | `/`      | Welcome message |
+| POST   | `/submit-feedback` | Submit feedback (To be implemented) |
 
-## ❤️ Support
-If you like this project, give it a ⭐ on GitHub!
-
-## 👤 Author
-Designed and developed by **Aishwarya** ✨
+## 📜 License
+This project is licensed under the MIT License. 📄
 
