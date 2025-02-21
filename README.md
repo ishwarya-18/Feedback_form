@@ -20,7 +20,7 @@ A simple feedback form with a Node.js backend and Express.js to handle feedback 
 ### 🔧 Setup & Installation
 1. **Clone the repository**
    ```sh
-   git clone [https://github.com/your-repo/feedback-form.git](https://github.com/ishwarya-18/Feedback_form)
+   git clone [https://github.com/ishwarya-18/Feedback_form]
    ```
 2. **Install dependencies**
    ```sh
